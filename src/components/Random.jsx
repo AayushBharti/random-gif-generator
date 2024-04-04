@@ -1,33 +1,29 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+import useGif from "../hooks/useGif";
 import Spinner from "./Spinner";
 
-// const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
-// const API_KEY = import.meta.env.REACT_APP_GIPHY_API_KEY;
-
-const API_KEY = "2VWCi5STRqliV9TaZpAnZeSLKr61DkEN";
+// const API_KEY = "2VWCi5STRqliV9TaZpAnZeSLKr61DkEN";
 const Random = () => {
-  const [gif, setGif] = useState("");
-  const [loading, setLoading] = useState(false);
+  //   const [gif, setGif] = useState("");
+  //   const [loading, setLoading] = useState(false);
 
-  async function fetchData() {
-    setLoading(true);
-    const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
-    const { data } = await axios.get(url); //similar to fetch but more secured
-    // console.log(output); //{data} is distructing the data
-    const imageSource = data.data.images.downsized_large.url;
-    setGif(imageSource);
-    setLoading(false);
-  }
+  //   async function fetchData() {
+  //     setLoading(true);
+  //     const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
+  //     const { data } = await axios.get(url); //similar to fetch but more secured
+  //     // console.log(output); //{data} is distructing the data
+  //     const imageSource = data.data.images.downsized_large.url;
+  //     setGif(imageSource);
+  //     setLoading(false);
+  //   }
 
-  useEffect(() => {
-    //only i time render
-    fetchData();
-  }, []);
+  //   useEffect(() => {
+  //     //only i time render
+  //     fetchData();
+  //   }, []);
 
-  function clickHandler() {
-    fetchData();
-  }
+  const { gif, loading, fetchData } = useGif();
 
   return (
     <div
@@ -52,7 +48,7 @@ const Random = () => {
       <button
         className="bg-green-200 w-1/2 p-2.5 rounded-lg mb-4 font-bold text-xl 
         tracking-wide hover:scale-105 hover:shadow-2xl transition-all duration-200"
-        onClick={clickHandler}
+        onClick={() => fetchData()}
       >
         GENERATE
       </button>
